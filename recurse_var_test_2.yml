@@ -1,0 +1,21 @@
+---
+- name: Ping
+  hosts: "{{ myinventory }}"
+  gather_facts: False
+
+  tasks:
+
+  - name: do random
+    shell: echo $(($RANDOM % 2))
+    register: diff_cmd
+    failed_when: diff_cmd.rc == 0
+
+  - name:  add devices with connectivity to the "working_hosts" group
+    group_by:
+      key: working_hosts
+
+  - name: "Artifact URL of test results to Tower Workflows"
+    set_stats:
+      data:
+        myinventory:  "{{ groups['working_hosts'] }}"
+    run_once: True

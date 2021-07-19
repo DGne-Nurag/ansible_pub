@@ -8,9 +8,10 @@
 
   - name: do random
     ansible.builtin.shell: echo $(($RANDOM % 2))
+    args:
+      executable: /bin/bash
     register: diff_cmd
-    failed_when: diff_cmd.rc == "0"
-    debug: diff_cmd
+    failed_when: diff_cmd.rc == 0
     delegate_to: localhost
 
   - name:  add devices with connectivity to the "working_hosts" group

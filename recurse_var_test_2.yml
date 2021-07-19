@@ -15,6 +15,9 @@
     group_by:
       key: working_hosts
 
+  - name: print array
+    debug: working_hosts
+
   - name: "Artifact URL of test results to Tower Workflows"
     set_stats:
       data:

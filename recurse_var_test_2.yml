@@ -6,9 +6,10 @@
   tasks:
 
   - name: do random
-    shell: echo $(($RANDOM % 2))
+    ansible.builtin.shell: echo $(($RANDOM % 2))
     register: diff_cmd
     failed_when: diff_cmd.rc == 0
+    delegate_to: localhost
 
   - name:  add devices with connectivity to the "working_hosts" group
     group_by:

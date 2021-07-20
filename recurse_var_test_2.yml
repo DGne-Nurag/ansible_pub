@@ -1,7 +1,8 @@
 ---
 - name: Ping
-  hosts: "{{ myinventory }}"
+  hosts: "{{ myinventory | default('all') }}"
   gather_facts: False
+  connection: local
 
   tasks:
 
